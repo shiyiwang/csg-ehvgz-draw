@@ -14,6 +14,8 @@ exports.entityLabel = '抽签';
 
 exports.enableFrontendExtension = true;
 
+exports.haveFilter = true;
+
 exports.labels = {
     name: '项目名称',
     unit: '所属单位',
@@ -33,15 +35,29 @@ exports.filters = {
 exports.style = 'grid';
 
 exports.grid = {
+    multiple: true,
     numberColumn: true,
     columns: [
-        {name: 'unit', defaultContent: '', width: 100},
-        {name: 'name', defaultContent: '',width: 150},
-        {name: 'sortitionNum', defaultContent: '', width: 50, renderer: 'modifyNum'},
-        {name: 'sortitionTime', defaultContent: '', width: 60, renderer: 'modifyTime'}
+        {name: 'unit', defaultContent: '', width: 80},
+        {name: 'name', defaultContent: '',width: 250},
+        {name: 'sortitionNum', defaultContent: '', width: 80, renderer: 'modifyNum'},
+        {name: 'sortitionTime', defaultContent: '', width: 100, renderer: 'modifyTime'}
     ],
-    defaultOrder: 'importTime-desc',
-    multiple: true
+    filterToolbar: true
+};
+
+exports.fieldGroups = {
+    filter: [
+        'unit', 'name'
+    ]
+};
+
+exports.forms = {
+    filter: {
+        groups: [
+            {name: 'filter', columns: 2}
+        ]
+    }
 };
 
 // 导出 excel 相关配置
@@ -60,6 +76,22 @@ exports.operators = {
 };
 
 exports.doWithRouter = function(router) {
+    router.get('/get-sortition-num', mark('services', 'draw/project-info').on(function (projectInfoSvc, request) {
+
+        var result = {},
+            numArr;
+
+        numArr = projectInfoSvc.getSortitionNumByUnit();
+
+        if (numArr.size() === 0){
+            result.flag = true;
+        }else {
+            result.flag = false;
+        }
+
+        return json(result);
+    }));
+
     router.get('/draw-project-info', mark('services', 'draw/project-info').on(function (projectInfoSvc, request) {
 
         projectInfoSvc.drawProjects();

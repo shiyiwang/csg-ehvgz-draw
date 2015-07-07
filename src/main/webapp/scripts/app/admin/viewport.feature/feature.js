@@ -68,7 +68,7 @@ define({
 
             app.config.featureContainer = content;
 
-            this.setHome({ name: '首页', featurePath: 'admin/home', iconClass: 'icon-home' });
+            this.setHome({ name: '首页', featurePath: 'draw/project-info', iconClass: 'icon-home' });
             this.updateNavigator();
 
             $.when(d1, d2).then(function() {

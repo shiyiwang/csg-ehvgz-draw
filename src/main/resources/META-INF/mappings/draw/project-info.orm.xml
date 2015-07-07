@@ -28,4 +28,10 @@
         </query>
     </named-query>
 
+    <named-query name="getSortitionNumByUnit">
+        <query>
+            select pi.sortitionNum from ProjectInfo pi where pi.unit = :unit and pi.sortitionNum is not null
+        </query>
+    </named-query>
+
 </entity-mappings>

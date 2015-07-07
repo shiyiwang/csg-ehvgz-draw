@@ -26,7 +26,7 @@ exports.createService = function() {
 
             options.filters = options.filters || [];
 
-            if (account.department && "" !== account.department.name){
+            if (account.department && "管理员单位" !== account.department.name){
                 options.filters.push(['eq', 'unit', account.department.name]);
             }
 
@@ -37,6 +37,12 @@ exports.createService = function() {
             }
 
             return fetchResult;
+        }),
+        getSortitionNumByUnit: mark('managers', ProjectInfo, Account).mark('tx').on(function (projectInfoMgr, accountMgr) {
+            var currentUser = SecurityUtils.getSubject().getPrincipal(),
+                account = accountMgr.find(currentUser.id);
+
+            return projectInfoMgr.getSortitionNumByUnit({unit: account.department.name});
         }),
         drawProjects: mark('managers', ProjectInfo).mark('tx').on(function (projectInfoMgr) {
             var currentUser = SecurityUtils.getSubject().getPrincipal(),
