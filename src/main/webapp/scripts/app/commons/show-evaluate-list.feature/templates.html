@@ -1,0 +1,33 @@
+{{#layout}}
+<div id="evaluate-list-view"></div>
+{{/layout}}
+
+{{#view "evaluate-list-view"}}
+<table class="table table-bordered table-striped table-hover dataTable">
+    <thead>
+        <tr>
+            <th style="width: 30px;">#</th>
+            <th style="width: 100px;">评估人</th>
+            <th style="width: 100px;">估算完成时间</th>
+            <th style="width: 100px;">估算工作量(人天)</th>
+            <th style="width: 100px;">估算价值(元)</th>
+        </tr>
+    </thead>
+    <tbody>
+        {{#each evaluateLists}}
+        <tr>
+            <td style="text-align: center;">{{index}}</td>
+            <td style="text-align: center;">{{name}}</td>
+            <td style="text-align: center;">{{expectTime}}</td>
+            <td style="text-align: center;">{{workload}}</td>
+            <td style="text-align: center;">{{workPrice}}</td>
+        </tr>
+        {{/each}}
+        {{#if noEvaluateList}}
+        <tr>
+            <td colspan="5">{{noEvaluateList}}</td>
+        </tr>
+        {{/if}}
+    </tbody>
+</table>
+{{/view}}

@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<entity-mappings xmlns="http://java.sun.com/xml/ns/persistence/orm"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://java.sun.com/xml/ns/persistence/orm http://www.oracle.com/webfolder/technetwork/jsc/xml/ns/persistence/orm_2_0.xsd"
+    version="2.0">
+
+    <named-query name="getProjectInfosBySelectedIds">
+        <query>
+            select pi from ProjectInfo pi where pi.id in :selectedIds
+        </query>
+    </named-query>
+
+    <named-query name="getMaxCountOfProjectInfos">
+        <query>
+            select count(pi) from ProjectInfo pi
+        </query>
+    </named-query>
+
+    <named-query name="getSortitionNum">
+        <query>
+            select pi.sortitionNum from ProjectInfo pi where pi.sortitionNum is not null
+        </query>
+    </named-query>
+
+    <named-query name="getprojectInfosByUnit">
+        <query>
+            select pi from ProjectInfo pi where pi.unit = :unit and pi.sortitionNum is null
+        </query>
+    </named-query>
+
+</entity-mappings>

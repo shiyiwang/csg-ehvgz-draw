@@ -1,0 +1,33 @@
+{{#layout}}
+    <div id="show-task-info-view"></div>
+{{/layout}}
+
+{{#view "show-task-info-view"}}
+    <table class="table table-bordered table-striped table-hover dataTable">
+        <thead>
+            <tr>
+                <th style="width: 10px;">#</th>
+                <th style="width: 30px;">负责人</th>
+                <th style="width: 250px;">进度(%)</th>
+            </tr>
+        </thead>
+        <tbody>
+            {{#each taskInfos}}
+            <tr>
+                <td style="text-align: center;">{{index}}</td>
+                <td style="text-align: center;">{{name}}</td>
+                <td>
+                    <div class="progress progress-info progress-striped" style="margin-top: 5px; margin-bottom: 5px;">
+                        <div class="bar" style="width: {{progress}}%;">{{progress}}%</div>
+                    </div>
+                </td>
+            </tr>
+            {{/each}}
+            {{#if noTaskInfo}}
+                <tr>
+                    <td colspan="5">{{noTaskInfo}}</td>
+                </tr>
+            {{/if}}
+        </tbody>
+    </table>
+{{/view}}

@@ -1,0 +1,7 @@
+target
+work
+logs
+*.class
+*.lst
+*.coffee
+src/main/webapp/scripts/cdeio
